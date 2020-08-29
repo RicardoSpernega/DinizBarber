@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
+using AutoMapper;
 using DinizAPI.Application;
 using DinizAPI.Domain.Enuns;
 using DinizAPI.Domain.Interfaces.Repositories;
@@ -117,6 +118,7 @@ namespace DinizAPI.Web
             #endregion
 
             services.AddControllers();
+            services.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

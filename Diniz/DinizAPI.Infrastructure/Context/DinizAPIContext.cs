@@ -14,7 +14,7 @@ namespace DinizAPI.Infrastructure.Context
 
         public DinizAPIContext(IConfiguration configuration)
         {
-            _connectionString = "Data Source=RICARDO;Initial Catalog=Diniz;Integrated Security=True;Connect Timeout=30;";//configuration.GetConnectionString("Diniz");
+            _connectionString = "Data Source=den1.mssql8.gear.host;Initial Catalog=diniz;Persist Security Info=True;User ID=diniz;Password=Ty8D_h!w88S5;MultipleActiveResultSets=True;Connection Timeout=120;";//configuration.GetConnectionString("Diniz");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

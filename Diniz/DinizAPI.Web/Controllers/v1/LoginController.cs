@@ -1,15 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using AutoMapper;
 using DinizAPI.Domain.Enuns;
 using DinizAPI.Domain.Interfaces.Services;
 using DinizAPI.Domain.Models.Api;
 using DinizAPI.Domain.Models.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace DinizAPI.Web.Controllers.v1
 {
@@ -20,10 +20,13 @@ namespace DinizAPI.Web.Controllers.v1
     public class LoginController : ControllerBase
     {
         private readonly ILoginService _loginService;
+        private readonly IMapper _mapper;
 
-        public LoginController(ILoginService loginService)
+        public LoginController(IMapper mapper, ILoginService loginService)
         {
+            _mapper = mapper;
             _loginService = loginService;
+
         }
 
         // GET: api/Login
@@ -60,9 +63,9 @@ namespace DinizAPI.Web.Controllers.v1
                     //TODO = mapeamento login - requestLogin -- validar email ja cadastrado, implementação de envio de email! 
                     //NEXT STEeP Horarios - mapeamento da tabela Horarios
 
-                    Login login = new Login() { Nome = request.NomeUsuario, Senha = request.SenhaUsuario, Email = request.EmailUsuario, Admin = request.Admin, DataNascimento = request.DataNascimento, Cpf = request.Cpf };
-                    var ret = _loginService.CadastroLogin(login);
-                    return TratarTipoRetorno(ResponseLogin.FromModelState(statusApi, ret.ToString()));
+                    var ret = _loginService.CadastroLogin(_mapper.Map<Login>(request));
+
+                    return TratarTipoRetorno(ResponseLogin.FromModelState(statusApi, request.NomeUsuario + " - Adicionado com sucesso !"));
                 }
                 var erros = ModelState.Values.SelectMany(m => m.Errors);
                 return TratarTipoRetorno(ResponseLogin.FromModelState(statusApi, erros.Select(x => x.ErrorMessage).ToArray()), request);

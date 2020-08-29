@@ -1,0 +1,11 @@
+C:\www\Diniz\Diniz\DinizAPI.Infrastructure\bin\Release\netstandard2.0\DinizAPI.Infrastructure.deps.json
+C:\www\Diniz\Diniz\DinizAPI.Infrastructure\bin\Release\netstandard2.0\DinizAPI.Infrastructure.dll
+C:\www\Diniz\Diniz\DinizAPI.Infrastructure\bin\Release\netstandard2.0\DinizAPI.Infrastructure.pdb
+C:\www\Diniz\Diniz\DinizAPI.Infrastructure\bin\Release\netstandard2.0\DinizAPI.Domain.dll
+C:\www\Diniz\Diniz\DinizAPI.Infrastructure\bin\Release\netstandard2.0\DinizAPI.Domain.pdb
+C:\www\Diniz\Diniz\DinizAPI.Infrastructure\obj\Release\netstandard2.0\DinizAPI.Infrastructure.csprojAssemblyReference.cache
+C:\www\Diniz\Diniz\DinizAPI.Infrastructure\obj\Release\netstandard2.0\DinizAPI.Infrastructure.AssemblyInfoInputs.cache
+C:\www\Diniz\Diniz\DinizAPI.Infrastructure\obj\Release\netstandard2.0\DinizAPI.Infrastructure.AssemblyInfo.cs
+C:\www\Diniz\Diniz\DinizAPI.Infrastructure\obj\Release\netstandard2.0\DinizAPI.Infrastructure.csproj.CopyComplete
+C:\www\Diniz\Diniz\DinizAPI.Infrastructure\obj\Release\netstandard2.0\DinizAPI.Infrastructure.dll
+C:\www\Diniz\Diniz\DinizAPI.Infrastructure\obj\Release\netstandard2.0\DinizAPI.Infrastructure.pdb

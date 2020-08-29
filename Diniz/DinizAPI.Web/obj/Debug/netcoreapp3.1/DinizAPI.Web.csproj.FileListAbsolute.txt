@@ -107,8 +107,6 @@ C:\www\Diniz\Diniz\DinizAPI.Web\bin\Debug\netcoreapp3.1\ru\Microsoft.CodeAnalysi
 C:\www\Diniz\Diniz\DinizAPI.Web\bin\Debug\netcoreapp3.1\tr\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\www\Diniz\Diniz\DinizAPI.Web\bin\Debug\netcoreapp3.1\zh-Hans\Microsoft.CodeAnalysis.Workspaces.resources.dll
 C:\www\Diniz\Diniz\DinizAPI.Web\bin\Debug\netcoreapp3.1\zh-Hant\Microsoft.CodeAnalysis.Workspaces.resources.dll
-C:\www\Diniz\Diniz\DinizAPI.Web\obj\Debug\netcoreapp3.1\DinizAPI.Web.MvcApplicationPartsAssemblyInfo.cs
-C:\www\Diniz\Diniz\DinizAPI.Web\obj\Debug\netcoreapp3.1\DinizAPI.Web.MvcApplicationPartsAssemblyInfo.cache
 C:\www\Diniz\Diniz\DinizAPI.Web\bin\Debug\netcoreapp3.1\Microsoft.Bcl.AsyncInterfaces.dll
 C:\www\Diniz\Diniz\DinizAPI.Web\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
 C:\www\Diniz\Diniz\DinizAPI.Web\bin\Debug\netcoreapp3.1\Microsoft.Data.SqlClient.dll
@@ -152,3 +150,6 @@ C:\www\Diniz\Diniz\DinizAPI.Web\bin\Debug\netcoreapp3.1\DinizAPI.Infrastructure.
 C:\www\Diniz\Diniz\DinizAPI.Web\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\www\Diniz\Diniz\DinizAPI.Web\bin\Debug\netcoreapp3.1\DinizAPI.Application.dll
 C:\www\Diniz\Diniz\DinizAPI.Web\bin\Debug\netcoreapp3.1\DinizAPI.Application.pdb
+C:\www\Diniz\Diniz\DinizAPI.Web\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\www\Diniz\Diniz\DinizAPI.Web\obj\Debug\netcoreapp3.1\DinizAPI.Web.MvcApplicationPartsAssemblyInfo.cs
+C:\www\Diniz\Diniz\DinizAPI.Web\obj\Debug\netcoreapp3.1\DinizAPI.Web.MvcApplicationPartsAssemblyInfo.cache
