@@ -151,5 +151,6 @@ C:\www\Diniz\Diniz\DinizAPI.Web\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\www\Diniz\Diniz\DinizAPI.Web\bin\Debug\netcoreapp3.1\DinizAPI.Application.dll
 C:\www\Diniz\Diniz\DinizAPI.Web\bin\Debug\netcoreapp3.1\DinizAPI.Application.pdb
 C:\www\Diniz\Diniz\DinizAPI.Web\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\www\Diniz\Diniz\DinizAPI.Web\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\www\Diniz\Diniz\DinizAPI.Web\obj\Debug\netcoreapp3.1\DinizAPI.Web.MvcApplicationPartsAssemblyInfo.cs
 C:\www\Diniz\Diniz\DinizAPI.Web\obj\Debug\netcoreapp3.1\DinizAPI.Web.MvcApplicationPartsAssemblyInfo.cache

@@ -35,5 +35,10 @@ namespace DinizAPI.Application
         {
             return _loginRepository.ListarLogin();
         }
+        public Login GetLoginByParam(Func<Login, bool> lambdaExpression)
+        {
+            return _loginRepository.GetLoginByParam(lambdaExpression);
+        }
+
     }
 }

@@ -11,6 +11,8 @@ namespace DinizAPI.Domain.Interfaces.Services
 
         Login GetLogin(int idLogin);
 
+        Login GetLoginByParam(Func<Login, bool> lambdaExpression);
+
         List<Login> ListarLogin();
 
         void DeletarLogin(Login login);

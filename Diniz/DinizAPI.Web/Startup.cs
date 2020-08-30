@@ -2,14 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
 using DinizAPI.Application;
 using DinizAPI.Domain.Enuns;
 using DinizAPI.Domain.Interfaces.Repositories;
 using DinizAPI.Domain.Interfaces.Services;
+using DinizAPI.Domain.Models.Api;
 using DinizAPI.Infrastructure.Repositories;
 using DinizAPI.Web.Utils.Swagger;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -19,6 +22,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
@@ -37,6 +41,26 @@ namespace DinizAPI.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            #region Autenticação
+
+           
+            services.AddAuthentication(option =>
+            {
+                option.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                option.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme; 
+
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"])),
+                    ValidateIssuer = false,
+                    ValidateAudience = false
+                };
+            });
+            #endregion
+
             #region Tratamento de Erros
             services.Configure<ApiBehaviorOptions>(options =>
             {
@@ -90,6 +114,30 @@ namespace DinizAPI.Web
                     Nullable = true
                 });
 
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                {
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer",
+                    BearerFormat = "JWT",
+                    In = ParameterLocation.Header,
+                    Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
+                });
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                          new OpenApiSecurityScheme
+                            {
+                                Reference = new OpenApiReference
+                                {
+                                    Type = ReferenceType.SecurityScheme,
+                                    Id = "Bearer"
+                                }
+                            },
+                            new string[] {}
+
+                    }
+                });
                 // Apply the filters
                 c.OperationFilter<RemoveVersionFromParameter>();
                 c.DocumentFilter<ReplaceVersionWithExactValueInPath>();
@@ -115,6 +163,7 @@ namespace DinizAPI.Web
                     && (!maps.Any() || maps.Any(v => $"v{v.ToString()}" == version));
                 });
             });
+
             #endregion
 
             services.AddControllers();
@@ -131,6 +180,14 @@ namespace DinizAPI.Web
 
             app.UseCors("EnableCORS");
 
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+
+            app.UseAuthorization();
+
+            app.UseAuthentication();
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
@@ -138,11 +195,6 @@ namespace DinizAPI.Web
                 c.RoutePrefix = string.Empty;
             });
 
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

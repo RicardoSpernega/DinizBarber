@@ -16,12 +16,15 @@ CREATE TABLE Login(
 	LoginId INT IDENTITY (1,1) PRIMARY KEY NOT NULL,
 	Email NVARCHAR(40) NOT NULL,
 	Admin BIT NOT NULL,
+    Ativo BIT NOT NULL,
 	Senha NVARCHAR(40) NOT NULL,
 	Cpf VARCHAR(11) NOT NULL,
 	DataNascimento DATE NOT NULL,
+    DataInclusao DATE NOT NULL,
 	Nome VARCHAR(40) NOT NULL
 )
 
 --FIM DO 
 
 PRINT(DB_NAME() + ' .. ' + CONVERT(VARCHAR, GETDATE(), 20) + '.-. Executado com sucesso.');
+

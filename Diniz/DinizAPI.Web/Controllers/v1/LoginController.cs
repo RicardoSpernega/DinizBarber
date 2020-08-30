@@ -3,6 +3,7 @@ using DinizAPI.Domain.Enuns;
 using DinizAPI.Domain.Interfaces.Services;
 using DinizAPI.Domain.Models.Api;
 using DinizAPI.Domain.Models.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using System;
@@ -16,6 +17,7 @@ namespace DinizAPI.Web.Controllers.v1
     [ApiVersion("1")]
     [ApiExplorerSettings(GroupName = "v1")]
     [Route("api/v{version:apiVersion}/[controller]")]
+    [Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme, Roles = "Admin")]
     [ApiController]
     public class LoginController : ControllerBase
     {
@@ -33,10 +35,6 @@ namespace DinizAPI.Web.Controllers.v1
         [HttpGet("{id}", Name = "Get")]
         [SwaggerOperation(
             Summary = "Buscar Login by Id")]
-        [ProducesResponseType(statusCode: 200, Type = typeof(Login))]
-        [ProducesResponseType(statusCode: 500, Type = typeof(Login))]
-        [ProducesResponseType(statusCode: 400, Type = typeof(Login))]
-        [ProducesResponseType(statusCode: 404, Type = typeof(Login))]
         public ActionResult Get(int idLogin)
         {
             try
@@ -55,6 +53,7 @@ namespace DinizAPI.Web.Controllers.v1
         [HttpGet]
         [SwaggerOperation(
             Summary = "Lista de login")]
+        
         public ActionResult Get()
         {
             try
