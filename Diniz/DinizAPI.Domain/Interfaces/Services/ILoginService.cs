@@ -8,5 +8,11 @@ namespace DinizAPI.Domain.Interfaces.Services
     public interface ILoginService
     {
         Login CadastroLogin(Login login);
+
+        Login GetLogin(int idLogin);
+
+        List<Login> ListarLogin();
+
+        void DeletarLogin(Login login);
     }
 }

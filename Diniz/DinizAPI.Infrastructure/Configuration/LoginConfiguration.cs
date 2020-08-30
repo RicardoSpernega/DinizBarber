@@ -42,6 +42,13 @@ namespace DinizAPI.Infrastructure.Configuration
                 .Property(l => l.Email)
                 .HasColumnName("Email");
 
+            builder
+                .Property(l => l.DataInclusao)
+                .HasColumnName("DataInclusao");
+
+            builder
+                .Property(l => l.Ativo)
+                .HasColumnName("Ativo");
         }
     }
 }

@@ -11,7 +11,7 @@ namespace DinizAPI.Domain.Models.Api
         public long LoginId { get; set; }
         public string NomeUsuario { get; set; }
         public string Email { get; set; }
-        public string TokenLogin { get; set; }
+        public string TokenLogin { get; set; } 
         public string[] Detalhes { get; set; }
         public TipoStatusAPIEnum IdStatus { get; set; }
         public static ResponseLogin FromModelState(TipoStatusAPIEnum status, string nomeUsuario = "", string email = "", string Token = "", long loginId = 0)

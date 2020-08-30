@@ -18,7 +18,14 @@ namespace DinizAPI.Infrastructure.Repositories
         }
         public Login CadastroLogin(Login login)
         {
-            _context.Login.Add(login);
+            if(login.LoginId != 0)
+            {
+                _context.Login.Update(login);
+            }
+            else
+            {
+                _context.Login.Add(login);
+            }
             _context.SaveChanges();
             return login;
         }
@@ -33,6 +40,17 @@ namespace DinizAPI.Infrastructure.Repositories
         {
             return _context.Login
                     .Where(lambdaExpression).ToList();
+        }
+
+        public List<Login> ListarLogin()
+        {
+            return _context.Login.ToList();
+        }
+
+        public void DeletarLogin(Login login)
+        {
+            _context.Login.Remove(login);
+            _context.SaveChanges();
         }
     }
 }

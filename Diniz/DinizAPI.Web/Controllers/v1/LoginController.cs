@@ -29,32 +29,56 @@ namespace DinizAPI.Web.Controllers.v1
 
         }
 
-        // GET: api/Login
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET: api/Login/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [SwaggerOperation(
+            Summary = "Buscar Login by Id")]
+        [ProducesResponseType(statusCode: 200, Type = typeof(Login))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(Login))]
+        [ProducesResponseType(statusCode: 400, Type = typeof(Login))]
+        [ProducesResponseType(statusCode: 404, Type = typeof(Login))]
+        public ActionResult Get(int idLogin)
         {
-            return "value";
+            try
+            {
+                var login = _loginService.GetLogin(idLogin);
+                return StatusCode(login == null ? 204 : 200, login);
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500,"Erro interno. - " + ex.Message);
+            }
+
+        }
+
+        // GET: api/Login/
+        [HttpGet]
+        [SwaggerOperation(
+            Summary = "Lista de login")]
+        public ActionResult Get()
+        {
+            try
+            {
+                return StatusCode(200, _loginService.ListarLogin());
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "Erro interno. - " + ex.Message);
+            }
+
         }
 
         // POST: api/Login
         [HttpPost]
         [SwaggerOperation(
             Summary = "Execução de Cadastro de Login.")]
-        [ProducesResponseType(statusCode: 200, Type = typeof(ResponseLogin))]
-        [ProducesResponseType(statusCode: 500, Type = typeof(ResponseLogin))]
-        [ProducesResponseType(statusCode: 400, Type = typeof(ResponseLogin))]
-        [ProducesResponseType(statusCode: 404, Type = typeof(ResponseLogin))]
-        public async Task<ActionResult<string>> Post(
-            [FromBody][Required][SwaggerParameter("Objeto de requisição")] RequestLogin request)
+        [ProducesResponseType(statusCode: 200, Type = typeof(Login))]
+        [ProducesResponseType(statusCode: 500, Type = typeof(Login))]
+        [ProducesResponseType(statusCode: 400, Type = typeof(Login))]
+        [ProducesResponseType(statusCode: 404, Type = typeof(Login))]
+        public ActionResult Post(
+            [FromBody][Required][SwaggerParameter("Objeto de requisição")] Login request)
         {
-            var statusApi = TipoStatusAPIEnum.Sucesso;
             try
             {
                 if (ModelState.IsValid)
@@ -63,17 +87,16 @@ namespace DinizAPI.Web.Controllers.v1
                     //TODO = mapeamento login - requestLogin -- validar email ja cadastrado, implementação de envio de email! 
                     //NEXT STEeP Horarios - mapeamento da tabela Horarios
 
-                    var ret = _loginService.CadastroLogin(_mapper.Map<Login>(request));
+                    var ret = _loginService.CadastroLogin(request);
 
-                    return TratarTipoRetorno(ResponseLogin.FromModelState(statusApi, request.NomeUsuario + " - Adicionado com sucesso !"));
+                    return StatusCode(200, ret);
                 }
                 var erros = ModelState.Values.SelectMany(m => m.Errors);
-                return TratarTipoRetorno(ResponseLogin.FromModelState(statusApi, erros.Select(x => x.ErrorMessage).ToArray()), request);
+                return StatusCode(200, erros);
             }
             catch(Exception ex)
             {
-                statusApi = TipoStatusAPIEnum.ErroInterno;
-                return TratarTipoRetorno(ResponseLogin.FromModelState(statusApi), request);
+                return StatusCode(401, ex.Message);
             }
         }
 
@@ -85,24 +108,24 @@ namespace DinizAPI.Web.Controllers.v1
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult Delete(int id)
         {
-        }
-
-
-        private ActionResult<string> TratarTipoRetorno(ResponseLogin response, RequestLogin request = null)
-        {
-            switch (response.IdStatus)
+            try
             {
-                case TipoStatusAPIEnum.Sucesso:
-                    return Ok(response);
+                var login = _loginService.GetLogin(id);
+                if (login != null)
+                {
+                    _loginService.DeletarLogin(login);
 
-                case TipoStatusAPIEnum.ErroInterno:
-                    return StatusCode(500, response);
-
-                default:
-                    return StatusCode(500, response);
+                    return StatusCode(200, "Login deletado com sucesso!");
+                }
+                return StatusCode(204, "Login não encontrado");
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
             }
         }
+
     }
 }

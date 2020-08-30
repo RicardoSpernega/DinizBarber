@@ -10,5 +10,7 @@ namespace DinizAPI.Domain.Interfaces.Repositories
         Login CadastroLogin(Login login);
         Login GetLoginByParam(Func<Login, bool> lambdaExpression);
         List<Login> ListarLoginByParam(Func<Login, bool> lambdaExpression);
+        List<Login> ListarLogin();
+        void DeletarLogin(Login login);
     }
 }

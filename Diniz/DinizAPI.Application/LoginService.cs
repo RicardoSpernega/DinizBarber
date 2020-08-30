@@ -20,5 +20,20 @@ namespace DinizAPI.Application
         {
             return _loginRepository.CadastroLogin(login);
         }
+
+        public void DeletarLogin(Login login)
+        {
+            _loginRepository.DeletarLogin(login);
+        }
+
+        public Login GetLogin(int idLogin)
+        {
+            return _loginRepository.GetLoginByParam(x => x.LoginId == idLogin);
+        }
+
+        public List<Login> ListarLogin()
+        {
+            return _loginRepository.ListarLogin();
+        }
     }
 }
