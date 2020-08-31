@@ -24,6 +24,7 @@ namespace DinizAPI.Infrastructure.Repositories
             }
             else
             {
+                login.DataInclusao = DateTime.Now;
                 _context.Login.Add(login);
             }
             _context.SaveChanges();

@@ -71,10 +71,6 @@ namespace DinizAPI.Web.Controllers.v1
         [HttpPost]
         [SwaggerOperation(
             Summary = "Execução de Cadastro de Login.")]
-        [ProducesResponseType(statusCode: 200, Type = typeof(Login))]
-        [ProducesResponseType(statusCode: 500, Type = typeof(Login))]
-        [ProducesResponseType(statusCode: 400, Type = typeof(Login))]
-        [ProducesResponseType(statusCode: 404, Type = typeof(Login))]
         public ActionResult Post(
             [FromBody][Required][SwaggerParameter("Objeto de requisição")] Login request)
         {
@@ -82,10 +78,6 @@ namespace DinizAPI.Web.Controllers.v1
             {
                 if (ModelState.IsValid)
                 {
-                    // BT ATIVO  - LOgin
-                    //TODO = mapeamento login - requestLogin -- validar email ja cadastrado, implementação de envio de email! 
-                    //NEXT STEeP Horarios - mapeamento da tabela Horarios
-
                     var ret = _loginService.CadastroLogin(request);
 
                     return StatusCode(200, ret);
@@ -100,10 +92,10 @@ namespace DinizAPI.Web.Controllers.v1
         }
 
         // PUT: api/Login/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+        //}
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]

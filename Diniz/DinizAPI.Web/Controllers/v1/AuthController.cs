@@ -6,7 +6,9 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
 using DinizAPI.Domain.Interfaces.Services;
+using DinizAPI.Domain.Models.Api;
 using DinizAPI.Domain.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -26,26 +28,69 @@ namespace DinizAPI.Web.Controllers.v1
     {
         private readonly ILoginService _loginService;
         private readonly IConfiguration _config;
+        private readonly IMapper _mapper;
 
-        public AuthController(IConfiguration config, ILoginService loginService)
+        public AuthController(IConfiguration config, ILoginService loginService, IMapper mapper)
         {
             _config = config;
             _loginService = loginService;
+            _mapper = mapper;
         }
 
         [HttpPost(nameof(Login))]
-        public async Task<IActionResult> Login([Required][SwaggerParameter("Email")] string email,
-                                                [Required][SwaggerParameter("Senha")] string senha)
+        public async Task<IActionResult> Login([FromBody][Required][SwaggerParameter("Objeto requerido")] RequestAuth request)
+                                                
         {
-            IActionResult response = Unauthorized();
-            var user = AuthenticateUser(email, senha);
-            if (user != null)
+            try
             {
-                var tokenString = TokenService.TokenService.GenerateToken(user);
-                response = Ok(new { Token = tokenString, Message = "Success" });
+                IActionResult response = Unauthorized();
+                var user = AuthenticateUser(request.EmailUsuario, request.SenhaUsuario);
+                if (user != null)
+                {
+                    var tokenString = TokenService.TokenService.GenerateToken(user);
+                    user.Senha = "";
+                    response = Ok(new { Token = tokenString, Message = "Usuario cadastrado com sucesso" , User = user});
+                }
+                return response;
             }
-            return response;
+            catch (Exception ex)
+            {
+                return StatusCode(401, ex.Message);
+            }
+
         }
+
+        [HttpPost(nameof(CadastrarLogin))]
+        [SwaggerOperation(
+            Summary = "Execução de Cadastro de Login.")]
+        public async Task<IActionResult> CadastrarLogin([FromBody][Required][SwaggerParameter("Objeto requerido")] RequestLogin request)
+
+        {
+            try
+            {
+                IActionResult response = Unauthorized();
+                if (ModelState.IsValid)
+                {
+                    if(_loginService.GetLoginByParam(x => x.Email == request.EmailUsuario) != null)
+                    {
+                        return StatusCode(200, "Email já cadastrado!");
+                    }
+                    var user = _loginService.CadastroLogin(_mapper.Map<Login>(request));
+                   
+                    response = Ok(new { User = user, Message = "Success" });
+                    
+                    return response;
+                }
+                var erros = ModelState.Values.SelectMany(m => m.Errors);
+                return StatusCode(401, erros);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(401, ex.Message);
+            }
+
+        }
+
 
         private Login AuthenticateUser(string email, string senha)
         {
