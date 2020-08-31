@@ -13,10 +13,6 @@ namespace DinizAPI.Domain.Models.Api
         [MaxLength(30, ErrorMessage = "NomeUsuario - Tamanho maximo de caracteres aceito : 30 ")]
         public string NomeUsuario { get; set; }
 
-        [Required(ErrorMessage = "Login - Campo obrigatório!")]
-        [MaxLength(15, ErrorMessage = "Login - Tamanho maximo de caracteres aceito : 15 ")]
-        public string Login { get; set; }
-
         [Required(ErrorMessage = "Cpf - Campo obrigatório!")]
         [MaxLength(11, ErrorMessage = "Cpf - Cpf inválido ")]
         public string Cpf { get; set; }
@@ -35,7 +31,10 @@ namespace DinizAPI.Domain.Models.Api
         //[RegularExpression(@"^\d{4}-((0\d)|(1[012]))-(([012]\d)|3[01])$", ErrorMessage = "DataNascimento - Aceito apenas o formato yyyy-mm-dd")]
         public DateTime DataNascimento { get; set; }
 
-        [Required(ErrorMessage = "TipoUsuario - Campo obrigatório!")]
+        [Required(ErrorMessage = "Admin - Campo obrigatório!")]
         public bool Admin { get; set; }
+
+        [Required(ErrorMessage = "Ativo - Campo obrigatório!")]
+        public bool Ativo { get; set; }
     }
 }

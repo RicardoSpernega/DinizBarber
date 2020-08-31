@@ -23,6 +23,7 @@ namespace DinizAPI.Application.AutoMapper.Profiles
                 .ForMember(dest => dest.Senha, a => a.MapFrom(src => src.SenhaUsuario))
                 .ForMember(dest => dest.DataNascimento, a => a.MapFrom(src => src.DataNascimento))
                 .ForMember(dest => dest.Admin, a => a.MapFrom(src => src.Admin))
+                .ForMember(dest => dest.Ativo, a => a.MapFrom(src => src.Ativo))
                 .ForMember(dest => dest.Nome, a => a.MapFrom(src => src.NomeUsuario));
         }
 

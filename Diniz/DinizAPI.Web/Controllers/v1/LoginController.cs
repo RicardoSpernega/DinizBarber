@@ -78,6 +78,15 @@ namespace DinizAPI.Web.Controllers.v1
             {
                 if (ModelState.IsValid)
                 {
+                    if (_loginService.GetLoginByParam(x => x.Email == request.Email) != null)
+                    {
+                        return StatusCode(200, "Email já cadastrado!");
+                    }
+                    if (_loginService.GetLoginByParam(x => x.Cpf == request.Cpf) != null)
+                    {
+                        return StatusCode(200, "Cpf já cadastrado!");
+                    }
+
                     var ret = _loginService.CadastroLogin(request);
 
                     return StatusCode(200, ret);
