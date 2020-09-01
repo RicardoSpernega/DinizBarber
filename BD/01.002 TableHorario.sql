@@ -15,8 +15,8 @@ END
 CREATE TABLE Horario(
 	HorarioId INT IDENTITY (1,1) PRIMARY KEY NOT NULL,
 	Dia DATE NOT NULL,
-	HorarioInicio NVARCHAR(10),
-	HorarioFim NVARCHAR(10)
+	HorarioInicio VARCHAR(10) NOT NULL ,
+	HorarioFim VARCHAR(10) NOT NULL
 )
 
 --FIM DO 

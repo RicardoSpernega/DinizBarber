@@ -32,6 +32,7 @@ namespace DinizAPI.Infrastructure.Context
         {
             modelBuilder.ApplyConfiguration(new LoginConfiguration());
             modelBuilder.ApplyConfiguration(new HorarioConfiguration());
+            modelBuilder.ApplyConfiguration(new LoginHorarioConfiguration());
         }
 
 

@@ -91,6 +91,8 @@ namespace DinizAPI.Web
             services.AddTransient<ILoginService, LoginService>();
             services.AddTransient<IHorarioService, HorarioService>();
             services.AddTransient<IHorarioRepository, HorarioRepository>();
+            services.AddTransient<ILoginHorarioRepository, LoginHorarioRepository>();
+            services.AddTransient<ILoginHorarioService, LoginHorarioService>();
 
             #endregion
 
