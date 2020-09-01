@@ -24,11 +24,14 @@ namespace DinizAPI.Infrastructure.Context
 
         //DBSET'S
         public DbSet<Login> Login { get; set; }
+        public DbSet<Horario> Horario { get; set; }
+        public DbSet<LoginHorario> LoginHorario { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new LoginConfiguration());
+            modelBuilder.ApplyConfiguration(new HorarioConfiguration());
         }
 
 

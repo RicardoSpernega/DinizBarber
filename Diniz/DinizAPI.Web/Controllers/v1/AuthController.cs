@@ -49,7 +49,7 @@ namespace DinizAPI.Web.Controllers.v1
                 {
                     var tokenString = TokenService.TokenService.GenerateToken(user);
                     user.Senha = "";
-                    response = Ok(new { Token = tokenString, Message = "Usuario cadastrado com sucesso" , User = user});
+                    response = Ok(new { Token = tokenString, Message = "Success" , User = user});
                 }
                 return response;
             }
