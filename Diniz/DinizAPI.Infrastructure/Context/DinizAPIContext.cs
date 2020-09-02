@@ -14,6 +14,7 @@ namespace DinizAPI.Infrastructure.Context
 
         public DinizAPIContext(IConfiguration configuration)
         {
+
             _connectionString = "Data Source=den1.mssql8.gear.host;Initial Catalog=diniz;Persist Security Info=True;User ID=diniz;Password=Ty8D_h!w88S5;MultipleActiveResultSets=True;Connection Timeout=120;";//configuration.GetConnectionString("Diniz");
         }
 
@@ -24,15 +25,17 @@ namespace DinizAPI.Infrastructure.Context
 
         //DBSET'S
         public DbSet<Login> Login { get; set; }
-        public DbSet<Horario> Horario { get; set; }
-        public DbSet<LoginHorario> LoginHorario { get; set; }
+        public DbSet<DiaHorarioAceite> DiaHorarioAceite { get; set; }
+        public DbSet<Dia> Dia { get; set; }
+
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new LoginConfiguration());
-            modelBuilder.ApplyConfiguration(new HorarioConfiguration());
-            modelBuilder.ApplyConfiguration(new LoginHorarioConfiguration());
+            modelBuilder.ApplyConfiguration(new DiaHorarioAceiteConfiguration());
+            modelBuilder.ApplyConfiguration(new DiaConfiguration());
+
         }
 
 

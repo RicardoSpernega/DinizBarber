@@ -49,9 +49,9 @@ namespace DinizAPI.Web.Controllers.v1
                 {
                     var tokenString = TokenService.TokenService.GenerateToken(user);
                     user.Senha = "";
-                    response = Ok(new { Token = tokenString, Message = "Success" , User = user});
+                    return StatusCode(200,new { Token = tokenString, Message = "Success" , User = user});
                 }
-                return response;
+                return StatusCode(200,"Login não encontrado!");
             }
             catch (Exception ex)
             {

@@ -19,6 +19,7 @@ namespace DinizAPI.Application.AutoMapper
             _config = new MapperConfiguration(ctg =>
                     {
                         ctg.AddProfile<LoginMappingProfile>();
+                        ctg.AddProfile<DiaHorarioAceiteMappingProfile>();
                     });
         }
     }
