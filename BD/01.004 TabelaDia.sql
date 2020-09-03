@@ -24,3 +24,4 @@ PRINT(DB_NAME() + ' .. ' + CONVERT(VARCHAR, GETDATE(), 20) + '.-. Executado com 
 
 
 
+

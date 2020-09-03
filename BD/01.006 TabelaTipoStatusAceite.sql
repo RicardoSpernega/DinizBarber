@@ -17,15 +17,11 @@ CREATE TABLE TipoStatusHorario(
 	Descricao NVARCHAR(50) NOT NULL
 )
 INSERT INTO TipoStatusHorario (TipoStatusHorarioId,Descricao)
-			VALUES			 (1,'Reservado'),
-							 (2,'Pendente'),
-							 (3,'Disponivel'),
-							 (4,'Cancelado')
+			VALUES			 (1,'Pendente'),
+							 (2,'Reservado'),
+							 (3,'Cancelado'),
+							 (4,'Disponivel')
 							 
 --FIM DO 
 
 PRINT(DB_NAME() + ' .. ' + CONVERT(VARCHAR, GETDATE(), 20) + '.-. Executado com sucesso.');
-
-
-
-

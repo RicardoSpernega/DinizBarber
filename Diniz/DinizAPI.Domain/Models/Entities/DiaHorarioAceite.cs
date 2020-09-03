@@ -14,7 +14,7 @@ namespace DinizAPI.Domain.Models.Entities
         public DateTime? DtAceite { get; set; }
         public Nullable<int> LoginId { get; set; }
         public int DiaId { get; set; }
-        public virtual Login Login { get; set; }
-        public virtual Dia Dia { get; set; }
+        public Login Login { get; set; }
+        public Dia Dia { get; set; }
     }
 }

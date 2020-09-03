@@ -18,6 +18,8 @@ namespace DinizAPI.Application
 
         public DiaHorarioAceite CadastroDiaHorarioAceite(DiaHorarioAceite diaHorarioAceite)
         {
+            if (diaHorarioAceite.TipoStatusHorarioId == 2)
+                diaHorarioAceite.DtAceite = DateTime.Now;
             return _diaHorarioAceiteRepository.CadastroDiaHorarioAceite(diaHorarioAceite);
         }
 

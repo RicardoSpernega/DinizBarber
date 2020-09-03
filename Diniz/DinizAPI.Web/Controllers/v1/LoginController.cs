@@ -32,10 +32,10 @@ namespace DinizAPI.Web.Controllers.v1
         }
 
         // GET: api/Login/5
-        [HttpGet("{id}", Name = "Get")]
+        [HttpGet]
         [SwaggerOperation(
             Summary = "Buscar Login by Id")]
-        public ActionResult Get(int idLogin)
+        public ActionResult Get([Required]int idLogin)
         {
             try
             {
@@ -50,11 +50,11 @@ namespace DinizAPI.Web.Controllers.v1
         }
 
         // GET: api/Login/
-        [HttpGet]
+        [HttpGet(nameof(ListarLogin))]
         [SwaggerOperation(
             Summary = "Lista de login")]
         
-        public ActionResult Get()
+        public ActionResult ListarLogin()
         {
             try
             {
@@ -72,7 +72,7 @@ namespace DinizAPI.Web.Controllers.v1
         [SwaggerOperation(
             Summary = "Execução de Cadastro de Login.")]
         public ActionResult Post(
-            [FromBody][Required][SwaggerParameter("Objeto de requisição")] Login request)
+            [FromBody][Required][SwaggerParameter("Objeto de requisição")] RequestLogin request)
         {
             try
             {
@@ -87,7 +87,7 @@ namespace DinizAPI.Web.Controllers.v1
                         return StatusCode(200, "Cpf já cadastrado!");
                     }
 
-                    var ret = _loginService.CadastroLogin(request);
+                    var ret = _loginService.CadastroLogin(_mapper.Map<Login>(request));
 
                     return StatusCode(200, ret);
                 }

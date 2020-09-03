@@ -71,7 +71,7 @@ namespace DinizAPI.Web.Controllers.v1
                 IActionResult response = Unauthorized();
                 if (ModelState.IsValid)
                 {
-                    if(_loginService.GetLoginByParam(x => x.Email == request.EmailUsuario) != null)
+                    if(_loginService.GetLoginByParam(x => x.Email == request.Email) != null)
                     {
                         return StatusCode(200, "Email já cadastrado!");
                     }

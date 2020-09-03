@@ -48,12 +48,12 @@ namespace DinizAPI.Infrastructure.Configuration
 
             builder
                 .HasOne(l => l.Login)
-                .WithMany()
+                .WithMany(l => l.DiaHorarioAceites)
                 .HasForeignKey("LoginId");
 
             builder
                 .HasOne(l => l.Dia)
-                .WithMany()
+                .WithMany(l => l.DiaHorarioAceites)
                 .HasForeignKey("DiaId");
 
         }

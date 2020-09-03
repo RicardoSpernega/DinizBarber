@@ -1,5 +1,6 @@
 ﻿using DinizAPI.Domain.Interfaces.Repositories;
 using DinizAPI.Domain.Models.Entities;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
@@ -34,18 +35,31 @@ namespace DinizAPI.Infrastructure.Repositories
         public Login GetLoginByParam(Func<Login, bool> lambdaExpression)
         {
             return _context.Login
+                    .AsNoTracking()
+                    .Include(x => x.DiaHorarioAceites)
+                        .ThenInclude(x => x.Dia)
+                    .AsNoTracking()
                     .Where(lambdaExpression).FirstOrDefault();
         }
 
         public List<Login> ListarLoginByParam(Func<Login, bool> lambdaExpression)
         {
             return _context.Login
+                    .AsNoTracking()
+                    .Include(x => x.DiaHorarioAceites)
+                        .ThenInclude(x => x.Dia)
+                    .AsNoTracking()
                     .Where(lambdaExpression).ToList();
         }
 
         public List<Login> ListarLogin()
         {
-            return _context.Login.ToList();
+            return _context.Login
+                    .AsNoTracking()
+                    .Include(x => x.DiaHorarioAceites)
+                        .ThenInclude(x => x.Dia)
+                    .AsNoTracking()
+                    .ToList();
         }
 
         public void DeletarLogin(Login login)

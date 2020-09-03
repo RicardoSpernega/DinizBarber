@@ -36,12 +36,22 @@ namespace DinizAPI.Infrastructure.Repositories
         public List<DiaHorarioAceite> ListarLoginByParam(Func<DiaHorarioAceite, bool> lambdaExpression)
         {
             return _context.DiaHorarioAceite
+                            .AsNoTracking()
+                            .Include(login => login.Login)
+                            .AsNoTracking()
+                            .Include(dia => dia.Dia)
+                            .AsNoTracking()
                     .Where(lambdaExpression).ToList();
         }
 
         public DiaHorarioAceite GetDiaHorarioAceiteByParam(Func<DiaHorarioAceite, bool> lambdaExpression)
         {
             return _context.DiaHorarioAceite
+                            .AsNoTracking()
+                            .Include(login => login.Login)
+                            .AsNoTracking()
+                            .Include(dia => dia.Dia)
+                            .AsNoTracking()
                     .Where(lambdaExpression).FirstOrDefault();
         }
 
@@ -49,16 +59,22 @@ namespace DinizAPI.Infrastructure.Repositories
         public List<DiaHorarioAceite> ListarDiaHorarioAceite()
         {
             return _context.DiaHorarioAceite
+                            .AsNoTracking()
                             .Include(login => login.Login)
+                            .AsNoTracking()
                             .Include(dia => dia.Dia)
+                            .AsNoTracking()
                             .ToList();
         }
 
         public List<DiaHorarioAceite> ListarDiaHorarioAceiteByParam(Func<DiaHorarioAceite, bool> lambdaExpression)
         {
             return _context.DiaHorarioAceite
+                            .AsNoTracking()
                             .Include(login => login.Login)
+                            .AsNoTracking()
                             .Include(dia => dia.Dia)
+                            .AsNoTracking()
                             .Where(lambdaExpression).ToList();
         }
     }

@@ -32,6 +32,7 @@ namespace DinizAPI.Domain.Models.Entities
         public string Nome { get; set; }
 
         public bool Ativo { get; set; }
+        public List<DiaHorarioAceite> DiaHorarioAceites { get; set; }
 
     }
 }

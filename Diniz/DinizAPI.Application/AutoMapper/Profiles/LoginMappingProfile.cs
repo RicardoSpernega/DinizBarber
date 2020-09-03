@@ -19,12 +19,12 @@ namespace DinizAPI.Application.AutoMapper.Profiles
 
 
             CreateMap<RequestLogin, Login>()
-                .ForMember(dest => dest.Email, a => a.MapFrom(src => src.EmailUsuario))
-                .ForMember(dest => dest.Senha, a => a.MapFrom(src => src.SenhaUsuario))
+                .ForMember(dest => dest.Email, a => a.MapFrom(src => src.Email))
+                .ForMember(dest => dest.Senha, a => a.MapFrom(src => src.Senha))
                 .ForMember(dest => dest.DataNascimento, a => a.MapFrom(src => src.DataNascimento))
                 .ForMember(dest => dest.Admin, a => a.MapFrom(src => src.Admin))
                 .ForMember(dest => dest.Ativo, a => a.MapFrom(src => src.Ativo))
-                .ForMember(dest => dest.Nome, a => a.MapFrom(src => src.NomeUsuario));
+                .ForMember(dest => dest.Nome, a => a.MapFrom(src => src.Nome));
         }
 
 

@@ -91,6 +91,8 @@ namespace DinizAPI.Web
             services.AddTransient<ILoginService, LoginService>();
             services.AddTransient<IDiaHorarioAceiteRepository, DiaHorarioAceiteRepository>();
             services.AddTransient<IDiaHorarioAceiteService, DiaHorarioAceiteService>();
+            services.AddTransient<IDiaRepository, DiaRepository>();
+            services.AddTransient<IDiaService, DiaService>();
 
             #endregion
 
@@ -170,7 +172,12 @@ namespace DinizAPI.Web
 
             services.AddControllers();
             services.AddAutoMapper();
-        }
+
+            services.AddControllers()
+                    .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+                    );
+        }   
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
